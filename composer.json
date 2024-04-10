@@ -1,0 +1,14 @@
+{
+    "name": "tuzoftware/core",
+    "description": "Rest Plugin and Utils for Fat Free Framework",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core"
+        }
+    },
+    "require": {
+        "bcosca/fatfree-core": "^3.8",
+        "vlucas/valitron": "^1.4"
+    }
+}
