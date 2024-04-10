@@ -1,5 +1,5 @@
 <?php
-namespace Core\base;
+namespace Core\Base;
 class ValidatorRegularExpressions
 {
 

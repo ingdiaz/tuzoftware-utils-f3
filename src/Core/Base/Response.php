@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\base;
+namespace Core\Base;
 class Response
 {
     // [Informational 1xx]

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\lib;
+namespace Core\Lib;
 class Autoload
 {
     function autoLoadClasses($dir = null)
