@@ -54,6 +54,16 @@ class Controller
         exit();
     }
 
+    protected function responseBodyOrNotFoundMessage($data){
+        if(empty($data)){
+            $this->errorResponse("Informacion no encontrada",Response::HTTP_NOT_FOUND);
+        }
+        echo json_encode($data);
+        header('Content-type: application/json');
+        http_response_code(Response::HTTP_OK);
+        exit();
+    }
+
     protected function errorResponse($messages,$httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
         $data = array();
         if(is_array($messages)){
