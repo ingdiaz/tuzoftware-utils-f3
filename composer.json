@@ -1,5 +1,5 @@
 {
-    "name": "tuzoftware/core",
+    "name": "tuzoftware/utils",
     "description": "Rest Plugin and Utils for Fat Free Framework",
     "type": "library",
     "autoload": {
