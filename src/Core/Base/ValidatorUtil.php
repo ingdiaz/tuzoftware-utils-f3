@@ -2,6 +2,7 @@
 
 namespace Core\Base;
 
+use Valitron\Validator;
 class ValidatorUtil{
 
     private $validator;
