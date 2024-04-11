@@ -2,7 +2,7 @@
 
 namespace Core\Base;
 
-class Validator{
+class ValidatorUtil{
 
     private $validator;
 

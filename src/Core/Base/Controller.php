@@ -4,13 +4,11 @@ namespace Core\Base;
 class Controller
 {
     protected $f3;
-    private $responseArray;
     protected $data;
 
 
     public function __construct(){
         $this->f3 = \Base::instance();
-        $this->responseArray=array();
     }
 
     protected function urlParameters(){

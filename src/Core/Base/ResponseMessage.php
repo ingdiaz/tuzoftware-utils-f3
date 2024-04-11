@@ -3,7 +3,13 @@
 namespace Core\Base;
 
 class ResponseMessage{
-    
+
+    private $responseArray;
+
+    public function __construct(){
+        $this->responseArray=array();
+    }
+
     public function response($key,$object){
         $this->responseArray[$key]=$object;
     }
