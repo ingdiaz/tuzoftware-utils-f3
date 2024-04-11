@@ -2,7 +2,7 @@
 
 namespace Core\Base;
 
-use Valitron\Validator;
+require 'vendor/autoload.php';
 class ValidatorUtil{
 
     private $validator;
