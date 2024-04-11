@@ -2,14 +2,17 @@
 
 namespace Core\Base;
 
+use Valitron\Validator;
+
 require 'vendor/autoload.php';
+
 class ValidatorUtil{
 
     private $validator;
 
 
     public function addValidationArray($validationArray){
-        $this->validator = new Valitron\Validator($validationArray);
+        $this->validator = new Validator($validationArray);
     }
 
     public function spaceText($array,$field){
