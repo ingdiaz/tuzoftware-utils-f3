@@ -156,7 +156,7 @@ class Repository
     public function convertArrayToModel($tableName, $array){
         $object = null;
         if($array!=null || count($array)!=0){
-            $object = new DB\SQL\Mapper($this->db,$tableName);
+            $object = new Mapper($this->db,$tableName);
             foreach ($array as $key => $value) {
                 $object->$key = $value;
             }
