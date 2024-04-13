@@ -2,6 +2,11 @@
 
 namespace Core\Base;
 
+use DB\SQL\Mapper;
+
+require 'vendor/autoload.php';
+
+
 class Repository
 {
     protected $db;
@@ -37,25 +42,25 @@ class Repository
     }
 
     public function getInstanceIdValue($tableName, $idName, $value){
-        $object=new DB\SQL\Mapper($this->db,$tableName);
+        $object=new Mapper($this->db,$tableName);
         $object->load(array($idName.'=?',$value));
         return $object;
     }
 
     public function getFieldByFieldValue($tableName, $fieldName, $value, $fieldNameToReturn){
-        $object=new DB\SQL\Mapper($this->db,$tableName);
+        $object=new Mapper($this->db,$tableName);
         $object->load(array($fieldName.'=?',$value));
         return $object[$fieldNameToReturn];
     }
 
     public function delete($tableName, $idName, $value){
-        $object=new DB\SQL\Mapper($this->db,$tableName);
+        $object=new Mapper($this->db,$tableName);
         $object->load(array($idName.'=?',$value));
         $object->erase();
     }
 
     public function existOnlyValue($tableName, $fieldName, $fieldValue){
-        $table=new DB\SQL\Mapper($this->db,$tableName);
+        $table=new Mapper($this->db,$tableName);
         $filter=array("$fieldName=?",$fieldValue);
         $table->load($filter);
         if(empty($table[$fieldName])){
@@ -67,7 +72,7 @@ class Repository
     }
 
     public function existValue($tableName, $idForeignKeyName, $foreignValue, $fieldName, $value){
-        $table=new DB\SQL\Mapper($this->db,$tableName);
+        $table=new Mapper($this->db,$tableName);
         $filter=array("$idForeignKeyName=? AND $fieldName=?",$foreignValue,$value);
         $table->load($filter);
         if(empty($table[$idForeignKeyName])){
@@ -79,7 +84,7 @@ class Repository
     }
 
     public function existId($tableName, $idName, $value){
-        $object=new DB\SQL\Mapper($this->db,$tableName);
+        $object=new Mapper($this->db,$tableName);
         $object->load(array($idName.'=?',$value));
         $exist=false;
         if(!empty($object[$idName])){
@@ -89,7 +94,7 @@ class Repository
     }
 
     public function existFieldUnique ($tableName, $array, $fieldName, $idName){
-        $object=new DB\SQL\Mapper($this->db,$tableName);
+        $object=new Mapper($this->db,$tableName);
         $exist=false;
         if(empty($array[$idName])){
             $object->load(array($fieldName.'=?',$array[$fieldName]));
