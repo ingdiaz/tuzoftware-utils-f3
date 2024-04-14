@@ -3,6 +3,8 @@
 namespace Core\Base;
 
 use Valitron\Validator;
+Validator::langDir(__DIR__.'/validator_lang'); // always set langDir before lang.
+Validator::lang('es');
 
 require 'vendor/autoload.php';
 
@@ -13,22 +15,12 @@ class ValidatorUtil{
 
     public function addValidationArray($validationArray){
         $this->validator = new Validator($validationArray);
-
-        /*
-         *  protected function validateRegex($field, $value, $params)
-    {
-        return preg_match($params[0], $value);
-    }
-
-          return preg_match('/^([a-z0-9])+$/i', $value);
-         * */
-
-     Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
+        Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
          return (empty($field) || empty($value))?false: preg_match($params[0], $value);
-        }, 'Error');
+        }, 'must contain valid characters');
         Validator::addRule('alphaNumeric', function($field, $value, array $params, array $fields) {
             return (empty($field) || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
-        }, 'Error');
+        }, 'must contain alpha Numeric');
     }
 
     public function spaceText($array,$field){
