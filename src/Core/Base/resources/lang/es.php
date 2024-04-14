@@ -35,5 +35,5 @@ return array(
     'subset'         => "contiene un elemento que no está en la lista",
     'arrayHasKeys'   => "no contiene todas las claves requeridas",
     'regularExpression' => "contiene caracteres inválidos",
-    'alphaNumeric' => "debe contener solo letras a-z"
+    'alphaNumeric' => "debe contener solo letras a-z o números 0-9"
 );
