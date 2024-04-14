@@ -13,6 +13,22 @@ class ValidatorUtil{
 
     public function addValidationArray($validationArray){
         $this->validator = new Validator($validationArray);
+
+        /*
+         *  protected function validateRegex($field, $value, $params)
+    {
+        return preg_match($params[0], $value);
+    }
+
+          return preg_match('/^([a-z0-9])+$/i', $value);
+         * */
+
+     Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
+         return empty($field || empty($value))?false: preg_match($params[0], $value);
+        }, 'Error');
+        Validator::addRule('alphaNumeric', function($field, $value, array $params, array $fields) {
+            return empty($field || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
+        }, 'Error');
     }
 
     public function spaceText($array,$field){
@@ -28,7 +44,7 @@ class ValidatorUtil{
         $this->validateRequired($field,$required);
         $this->validator->rule('lengthBetween',$field, $minLong,$maxLong);
         if(!empty($regularExpression)){
-            $this->validator->rule('regex',$field,$regularExpression);
+            $this->validator->rule('regularExpression',$field,$regularExpression);
         }
     }
 
@@ -61,7 +77,7 @@ class ValidatorUtil{
     public function validatePassword($field, $required, $minLong, $maxLong){
         $this->validateRequired($field,$required);
         $this->validator->rule('lengthBetween',$field, $minLong,$maxLong);
-        $this->validator->rule('alphaNum',$field);
+        $this->validator->rule('alphaNumeric',$field);
     }
     public function validateCurp($field, $required, $minLong, $maxLong){
         $this->validateRequired($field,$required);
