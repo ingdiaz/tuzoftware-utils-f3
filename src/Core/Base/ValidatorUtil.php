@@ -16,10 +16,10 @@ class ValidatorUtil{
         $this->validator = new Validator($validationArray);
         Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
          return (empty($field) || empty($value))?false: preg_match($params[0], $value);
-        }, 'must contain valid characters');
+        });
         Validator::addRule('alphaNumeric', function($field, $value, array $params, array $fields) {
             return (empty($field) || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
-        }, 'must contain alpha Numeric');
+        });
     }
 
     public function spaceText($array,$field){
