@@ -3,7 +3,7 @@
 namespace Core\Base;
 
 use Valitron\Validator;
-Validator::langDir(__DIR__.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang');
+Validator::langDir(__DIR__.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang');
 Validator::lang('es');
 
 require 'vendor/autoload.php';
