@@ -3,7 +3,7 @@
 namespace Core\Base;
 
 use Valitron\Validator;
-Validator::langDir('vendor/vlucas/valitron/lang/validator_lang'); // always set langDir before lang.
+Validator::langDir(__DIR__.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang');
 Validator::lang('es');
 
 require 'vendor/autoload.php';
@@ -11,7 +11,6 @@ require 'vendor/autoload.php';
 class ValidatorUtil{
 
     private $validator;
-
 
     public function addValidationArray($validationArray){
         $this->validator = new Validator($validationArray);
