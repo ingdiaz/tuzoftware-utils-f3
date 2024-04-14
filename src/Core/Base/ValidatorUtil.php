@@ -3,7 +3,7 @@
 namespace Core\Base;
 
 use Valitron\Validator;
-Validator::langDir(__DIR__.'/validator_lang'); // always set langDir before lang.
+Validator::langDir('vendor/vlucas/valitron/lang/validator_lang'); // always set langDir before lang.
 Validator::lang('es');
 
 require 'vendor/autoload.php';
