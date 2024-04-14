@@ -24,10 +24,10 @@ class ValidatorUtil{
          * */
 
      Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
-         return empty($field || empty($value))?false: preg_match($params[0], $value);
+         return (empty($field) || empty($value))?false: preg_match($params[0], $value);
         }, 'Error');
         Validator::addRule('alphaNumeric', function($field, $value, array $params, array $fields) {
-            return empty($field || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
+            return (empty($field) || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
         }, 'Error');
     }
 
