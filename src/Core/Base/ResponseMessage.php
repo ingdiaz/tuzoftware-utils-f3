@@ -16,6 +16,8 @@ class ResponseMessage{
 
     public function successResponse($message){
         $data = array();
+        $data['type']=ResponseMessageType::GLOBAL;
+        $data['subType']=ResponseMessageSubType::SUCCESS;
         $data['message']=$message;
         echo json_encode($data);
         header('Content-type: application/json');
@@ -32,23 +34,20 @@ class ResponseMessage{
 
     public function responseBodyOrNotFoundMessage($data){
         if(empty($data)){
-            $this->errorResponse("Informacion no encontrada",Response::HTTP_NOT_FOUND);
+            $this->errorResponse("Informacion no encontrada",ResponseMessageType::GLOBAL,ResponseMessageSubType::WARN,Response::HTTP_NOT_FOUND);
         }
+        $data['type']=ResponseMessageType::GLOBAL;
+        $data['subType']=ResponseMessageSubType::SUCCESS;
         echo json_encode($data);
         header('Content-type: application/json');
         http_response_code(Response::HTTP_OK);
         exit();
     }
 
-    public function errorResponse($messages,$httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
+    public function errorResponse($messages,$type=ResponseMessageType::GLOBAL,$subType=ResponseMessageSubType::WARN,$httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
         $data = array();
-        if(is_array($messages)){
-            $data['messages']=$messages;
-            $data['type']="VALIDATION";
-        }else{
-            $data['message']=$messages;
-            $data['type']="GLOBAL";
-        }
+        $data['type']=$type;
+        $data['subType']=$subType;
         echo json_encode($data);
         header('Content-type: application/json');
         http_response_code($httpStatusCode);
