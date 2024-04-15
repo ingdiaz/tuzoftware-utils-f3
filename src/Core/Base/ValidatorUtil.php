@@ -12,6 +12,7 @@ class ValidatorUtil{
 
     private $validator;
 
+
     public function addValidationArray($validationArray){
         $this->validator = new Validator($validationArray);
         Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
@@ -50,8 +51,9 @@ class ValidatorUtil{
     public function validate(){
         if(!$this->validator->validate()) {
             header('Content-Type: application/json');
-            echo json_encode($this->validator->errors());
-            exit;
+            echo json_encode();
+            $responseMessage=new ResponseMessage();
+            $responseMessage->errorResponse($this->validator->errors(),ResponseType::FORM);
         }
         return true;
     }

@@ -44,7 +44,7 @@ class ResponseMessage{
         exit();
     }
 
-    public function errorResponse($messages, $type=ResponseType::GLOBAL, $subType=ResponseMessageType::WARN, $httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
+    public function errorResponse($messages, $type=ResponseType::GLOBAL, $subType=ResponseMessageType::ERROR, $httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
         $data = array();
         $data['messages']=$messages;
         $data['responseType']=$type;
