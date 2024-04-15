@@ -23,7 +23,7 @@ class ValidatorUtil{
     }
 
     public function spaceText($array,$field){
-        $v = new Valitron\Validator($array);
+        $v = new Validator($array);
         $v->rule('required', $field);
         if(!$v->validate()) {
             $v->errors();
@@ -73,7 +73,7 @@ class ValidatorUtil{
     public function validateCurp($field, $required, $minLong, $maxLong){
         $this->validateRequired($field,$required);
         $this->validator->rule('lengthBetween',$field, $minLong,$maxLong);
-        $this->validator->rule('alphaNum',$field);
+        $this->validator->rule('alphaNumeric',$field);
     }
     public function validateEmail($field, $required, $minLong, $maxLong)
     {
