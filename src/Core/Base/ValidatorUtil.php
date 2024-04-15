@@ -21,15 +21,7 @@ class ValidatorUtil{
             return (empty($field) || empty($value))?false: preg_match('/^([a-z0-9])+$/i', $value);
         }, 'debe contener solo letras a-z o números 0-9');
     }
-
-    public function spaceText($array,$field){
-        $v = new Validator($array);
-        $v->rule('required', $field);
-        if(!$v->validate()) {
-            $v->errors();
-        }
-        return true;
-    }
+    
 
     public function  validateText($field, $required, $minLong, $maxLong, $regularExpression=''){
         $this->validateRequired($field,$required);
