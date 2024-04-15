@@ -4,7 +4,12 @@ namespace Core\Base;
 
 class ResponseMessageType
 {
-    const GLOBAL='GLOBAL';
+    const INFO='INFO';
 
-    const FORM='FORM';
+    const WARN='WARN';
+
+    const ERROR='ERROR';
+
+    const SUCCESS='SUCCESS';
+
 }
