@@ -51,7 +51,6 @@ class ValidatorUtil{
     public function validate(){
         if(!$this->validator->validate()) {
             header('Content-Type: application/json');
-            echo json_encode();
             $responseMessage=new ResponseMessage();
             $responseMessage->errorResponse($this->validator->errors(),ResponseType::FORM);
         }
