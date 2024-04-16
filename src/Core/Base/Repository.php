@@ -210,5 +210,11 @@ class Repository
             $this->filters["$parameterName"]=$filters["$parameterName"];
         }
     }
+    protected function addNotEqualFilter($filters,$parameterName,$conjunction="AND"){
+        if(!empty($filters[$parameterName])){
+            $this->sql= $this->sql." $conjunction $parameterName != :$parameterName";
+            $this->filters["$parameterName"]=$filters["$parameterName"];
+        }
+    }
 
 }
