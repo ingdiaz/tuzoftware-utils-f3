@@ -15,6 +15,7 @@ class ValidatorUtil{
 
     public function addValidationArray($validationArray){
         $this->validator = new Validator($validationArray);
+        $this->validator->setPrependLabels(false);
         Validator::addRule('regularExpression', function($field, $value, array $params, array $fields) {
          return (empty($field) || empty($value))?false: preg_match($params[0], $value);
         }, 'contiene caracteres invalidos');
@@ -71,7 +72,13 @@ class ValidatorUtil{
         $this->validateRequired($field, $required);
         $this->validator->rule('lengthBetween', $field, $minLong, $maxLong);
         $this->validator->rule('email', $field);
-
+    }
+    public function validateExistYesNoOptions($field){
+        $options=array('SI','NO');
+        $this->validator->rule('in',$field,$options);
+    }
+    public function validateExistAnyOption($field,$options){
+        $this->validator->rule('in',$field,$options);
     }
 
 }
