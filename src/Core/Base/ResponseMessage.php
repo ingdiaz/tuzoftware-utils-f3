@@ -33,12 +33,14 @@ class ResponseMessage{
     }
 
     public function responseBodyOrNotFoundMessage($data){
+        $jsonData = array();
         if(empty($data)){
             $this->errorResponse("Informacion no encontrada",ResponseType::GLOBAL,ResponseMessageType::WARN,Response::HTTP_NOT_FOUND);
         }
-        $data['responseType']=ResponseType::GLOBAL;
-        $data['type']=ResponseMessageType::SUCCESS;
-        echo json_encode($data);
+        $jsonData['responseType']=ResponseType::GLOBAL;
+        $jsonData['type']=ResponseMessageType::SUCCESS;
+        $jsonData['data']=$data;
+        echo json_encode($jsonData);
         header('Content-type: application/json');
         http_response_code(Response::HTTP_OK);
         exit();
