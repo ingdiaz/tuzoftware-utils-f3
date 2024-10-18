@@ -5,8 +5,12 @@ namespace Core\Base;
 class ResponseMessage {
 
 
-    public function successResponse() {
-        http_response_code(Response::HTTP_OK); // OK
+    public function successResponse($message){
+        $data = array();
+        $data['message']=$message;
+        echo json_encode($data);
+        header('Content-type: application/json');
+        http_response_code(Response::HTTP_OK);
         exit();
     }
 
