@@ -37,4 +37,11 @@ class Controller
         return json_decode($jsonBody,$convertToArray);
     }
 
+    protected function requestBodyField($fieldName){
+        $jsonBody=file_get_contents('php://input');
+        $payload = json_decode($jsonBody,true);
+        return $payload[$fieldName];
+    }
+
+
 }

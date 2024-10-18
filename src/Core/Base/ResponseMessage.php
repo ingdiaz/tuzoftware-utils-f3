@@ -2,59 +2,54 @@
 
 namespace Core\Base;
 
-class ResponseMessage{
+class ResponseMessage {
 
-    private $responseArray;
 
-    public function __construct(){
-        $this->responseArray=array();
-    }
-
-    public function response($key,$object){
-        $this->responseArray[$key]=$object;
-    }
-
-    public function successResponse($message){
-        $data = array();
-        $data['responseType']=ResponseType::GLOBAL;
-        $data['type']=ResponseMessageType::SUCCESS;
-        $data['messages']=$message;
-        echo json_encode($data);
-        header('Content-type: application/json');
-        http_response_code(Response::HTTP_OK);
+    public function successResponse() {
+        http_response_code(Response::HTTP_OK); // OK
         exit();
     }
 
-    public function responseBody($data){
-        echo json_encode($data);
+    public function responseBody($data) {
         header('Content-type: application/json');
-        http_response_code(Response::HTTP_OK);
+        echo json_encode($data); // Solo los datos
+        http_response_code(Response::HTTP_OK); // OK
         exit();
     }
 
-    public function responseBodyOrNotFoundMessage($data){
-        $jsonData = array();
-        if(empty($data)){
-            $this->errorResponse("Informacion no encontrada",ResponseType::GLOBAL,ResponseMessageType::WARN,Response::HTTP_NOT_FOUND);
+
+    public function responseDataTableBodyOrNotFoundMessage($data, $totalRecords) {
+        if (empty($data)) {
+            $this->errorResponse("Información no encontrada", Response::HTTP_NOT_FOUND);
         }
-        $jsonData['responseType']=ResponseType::GLOBAL;
-        $jsonData['type']=ResponseMessageType::SUCCESS;
-        $jsonData['data']=$data;
-        echo json_encode($jsonData);
+        $jsonData = array($data, $totalRecords); // Solo los valores (data y totalRecords)
         header('Content-type: application/json');
-        http_response_code(Response::HTTP_OK);
+        echo json_encode($jsonData);
+        http_response_code(Response::HTTP_OK); // OK
         exit();
     }
 
-    public function errorResponse($messages, $type=ResponseType::GLOBAL, $subType=ResponseMessageType::ERROR, $httpStatusCode=Response::HTTP_HTTP_UNPROCESSABLE_ENTITY){
-        $data = array();
-        $data['messages']=$messages;
-        $data['responseType']=$type;
-        $data['type']=$subType;
-        echo json_encode($data);
+    public function responseBodyOrNotFoundMessage($data) {
+        if (empty($data)) {
+            $this->errorResponse("Información no encontrada", Response::HTTP_NOT_FOUND);
+        }
+        $jsonData = array($data); // Solo los valores (data y totalRecords)
         header('Content-type: application/json');
-        http_response_code($httpStatusCode);
+        echo json_encode($jsonData);
+        http_response_code(Response::HTTP_OK); // OK
+        exit();
+    }
+
+
+    public function errorResponse($message, $httpStatusCode = Response::HTTP_HTTP_UNPROCESSABLE_ENTITY) {
+        $data = array(
+            'messages' => $message
+        );
+        header('Content-type: application/json');
+        echo json_encode($data);
+        http_response_code($httpStatusCode); // Código de error 422 por defecto
         exit();
     }
 
 }
+
