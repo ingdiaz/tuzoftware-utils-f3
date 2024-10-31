@@ -37,9 +37,8 @@ class ResponseMessage {
         if (empty($data)) {
             $this->errorResponse("Información no encontrada", Response::HTTP_NOT_FOUND);
         }
-        $jsonData = array($data); // Solo los valores (data y totalRecords)
         header('Content-type: application/json');
-        echo json_encode($jsonData);
+        echo json_encode($data);
         http_response_code(Response::HTTP_OK); // OK
         exit();
     }
